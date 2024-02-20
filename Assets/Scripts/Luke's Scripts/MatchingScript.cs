@@ -7,6 +7,9 @@ public class MatchingScript : MonoBehaviour
     public GameObject left;
     public GameObject right;
     private GameObject SelectedObject;
+
+    TimerScript timer;
+    public GameObject timerText;
     
     //Function to pick the next object to sort
     private void SelectObject()
@@ -28,6 +31,7 @@ public class MatchingScript : MonoBehaviour
     void Start()
     {
         SelectObject(); //Selects the inital object to sort
+        timer = timerText.GetComponent<TimerScript>();
     }
     // Update is called once per frame
     void Update()
@@ -69,5 +73,7 @@ public class MatchingScript : MonoBehaviour
     void incorrrectSort()
     {
         Debug.Log("Wrong...");
+        timer.decreaseTimer();
     }
+
 }
