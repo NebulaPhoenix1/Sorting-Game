@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,13 @@ public class MatchingScript : MonoBehaviour
     public GameObject left;
     public GameObject right;
     private GameObject SelectedObject;
-
+    //Timer modification variables
+    private int correctInARow;
+    private float averageSortTime; //Average time to sort. Will reset on bonus time granted
+    private float sortTime = 0; //Current total sort time for next bonus
+    public int neededForBonus; //Amount in a row needed to get time bonus
+    public float maxTimeForBonus; //Max time in which time bonus can be granted
+    //Timer variables
     TimerScript timer;
     public GameObject timerText;
     
@@ -15,7 +22,7 @@ public class MatchingScript : MonoBehaviour
     private void SelectObject()
     {
         //Picks random number between 1 and 2 for left or right sorting
-        int x = Random.Range(1, 3);
+        int x = UnityEngine.Random.Range(1, 3);
         if (x == 1)
         {
             SelectedObject = Instantiate(left);
@@ -42,9 +49,7 @@ public class MatchingScript : MonoBehaviour
             //If matching object has correct tag
             if (SelectedObject.tag == "Left")
             {
-                Debug.Log("left");
-                DestroyImmediate(SelectedObject,true);
-                SelectObject();
+                correctSort();
             }
             //If matching object is wrong
             else
@@ -58,9 +63,7 @@ public class MatchingScript : MonoBehaviour
             //If matching object has correct tag
             if (SelectedObject.tag == "Right")
             {
-                Debug.Log("right");
-                DestroyImmediate(SelectedObject,true);
-                SelectObject();
+                correctSort();
             }
             //If matching object is wrong
             else
@@ -74,6 +77,24 @@ public class MatchingScript : MonoBehaviour
     {
         Debug.Log("Wrong...");
         timer.decreaseTimer();
+        correctInARow = 0;
+        sortTime = 0;
+        averageSortTime = 0;
     }
 
+    void correctSort()
+    {
+        DestroyImmediate(SelectedObject, true);
+        SelectObject();
+        correctInARow += 1;
+        sortTime += Time.deltaTime;
+        averageSortTime = sortTime / correctInARow;
+        if (averageSortTime < maxTimeForBonus && correctInARow >= neededForBonus) 
+        { 
+            timer.increaseTimer();
+            correctInARow = 0;
+            sortTime = 0;
+            averageSortTime = 0;
+        }
+    }
 }
