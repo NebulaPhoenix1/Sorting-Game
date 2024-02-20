@@ -7,6 +7,9 @@ public class MatchingScript : MonoBehaviour
     public GameObject left;
     public GameObject right;
     private GameObject SelectedObject;
+
+    TimerScript timer;
+    public GameObject timerText;
     
     //Function to pick the next object to sort
     private void SelectObject()
@@ -16,18 +19,19 @@ public class MatchingScript : MonoBehaviour
         if (x == 1)
         {
             SelectedObject = Instantiate(left);
-            SelectedObject.transform.position = new Vector2(-5, 0);
+            SelectedObject.transform.position = new Vector2(0, 0);
         }
         else
         {
             SelectedObject = Instantiate(right);
-            SelectedObject.transform.position = new Vector2(5, 0);
+            SelectedObject.transform.position = new Vector2(0, 0);
         }
     }
     // Start is called before the first frame update
     void Start()
     {
         SelectObject(); //Selects the inital object to sort
+        timer = timerText.GetComponent<TimerScript>();
     }
     // Update is called once per frame
     void Update()
@@ -45,7 +49,7 @@ public class MatchingScript : MonoBehaviour
             //If matching object is wrong
             else
             {
-                Debug.Log("Wrong...");
+                incorrrectSort();
             }
         }
         //Check for right click
@@ -61,8 +65,15 @@ public class MatchingScript : MonoBehaviour
             //If matching object is wrong
             else
             {
-                Debug.Log("Wrong...");
+                incorrrectSort();
             }
         }
     }
+
+    void incorrrectSort()
+    {
+        Debug.Log("Wrong...");
+        timer.decreaseTimer();
+    }
+
 }
