@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class MatchingScript : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class MatchingScript : MonoBehaviour
     private float sortTime = 0; //Current total sort time for next bonus
     public int neededForBonus; //Amount in a row needed to get time bonus
     public float maxTimeForBonus; //Max time in which time bonus can be granted
+    //End Screen Stuff
+    public int totalSorted; //Total correctly sorted
+    public TMP_Text totalSortedUI;
     //Timer variables
     TimerScript timer;
     public GameObject timerText;
@@ -33,48 +37,55 @@ public class MatchingScript : MonoBehaviour
             SelectedObject = Instantiate(right);
             SelectedObject.transform.position = new Vector2(0, 0);
         }
+        
     }
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1; //Resets time scale after reloading scene (makes it so timer keeps ticking)
         SelectObject(); //Selects the inital object to sort
         timer = timerText.GetComponent<TimerScript>();
     }
     // Update is called once per frame
     void Update()
     {
-        //Check for left click
-        if(Input.GetMouseButtonDown(0))
+        if(Time.timeScale == 1) //This should prevent total sorted increasing on time up screen
         {
-            //If matching object has correct tag
-            if (SelectedObject.tag == "Left")
+            //Check for left click
+            if (Input.GetMouseButtonDown(0))
             {
-                correctSort();
+                //If matching object has correct tag
+                if (SelectedObject.tag == "Left")
+                {
+                    correctSort();
+                }
+                //If matching object is wrong
+                else
+                {
+                    incorrrectSort();
+                }
             }
-            //If matching object is wrong
-            else
+            //Check for right click
+            if (Input.GetMouseButtonDown(1))
             {
-                incorrrectSort();
-            }
-        }
-        //Check for right click
-        if (Input.GetMouseButtonDown(1))
-        {
-            //If matching object has correct tag
-            if (SelectedObject.tag == "Right")
-            {
-                correctSort();
-            }
-            //If matching object is wrong
-            else
-            {
-                incorrrectSort();
+                //If matching object has correct tag
+                if (SelectedObject.tag == "Right")
+                {
+                    correctSort();
+                }
+                //If matching object is wrong
+                else
+                {
+                    incorrrectSort();
+                }
             }
         }
     }
+        
 
     void incorrrectSort()
     {
+        ///Decreases game time and resets bonus time variables
         Debug.Log("Wrong...");
         timer.decreaseTimer();
         correctInARow = 0;
@@ -84,13 +95,20 @@ public class MatchingScript : MonoBehaviour
 
     void correctSort()
     {
-        DestroyImmediate(SelectedObject, true);
+        //Destroys current item and selects a new one to be sorted
+        DestroyImmediate(SelectedObject, true); 
         SelectObject();
+        //Updates total sorted and end game UI
+        totalSorted += 1;
+        totalSortedUI.SetText("You sorted " + totalSorted + " cards");
+        //Bonus time variables updating 
         correctInARow += 1;
         sortTime += Time.deltaTime;
         averageSortTime = sortTime / correctInARow;
+        //If average sort time for last 3 is less than maxTimeForBonus and you have sorted enough correctly in a row
         if (averageSortTime < maxTimeForBonus && correctInARow >= neededForBonus) 
         { 
+            //Increase timer and reset all bonus variables
             timer.increaseTimer();
             correctInARow = 0;
             sortTime = 0;
