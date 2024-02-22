@@ -9,6 +9,7 @@ public class MatchingScript : MonoBehaviour
     public GameObject left;
     public GameObject right;
     private GameObject SelectedObject;
+    public TMP_Text scoreText;
     //Timer modification variables
     private int correctInARow;
     private float averageSortTime; //Average time to sort. Will reset on bonus time granted
@@ -101,6 +102,7 @@ public class MatchingScript : MonoBehaviour
         //Updates total sorted and end game UI
         totalSorted += 1;
         totalSortedUI.SetText("You sorted " + totalSorted + " cards");
+        scoreText.SetText("Score: " + totalSorted);
         //Bonus time variables updating 
         correctInARow += 1;
         sortTime += Time.deltaTime;

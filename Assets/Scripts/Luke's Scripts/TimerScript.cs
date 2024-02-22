@@ -7,19 +7,23 @@ using UnityEngine.SceneManagement;
 public class TimerScript : MonoBehaviour
 {
     public float startTime = 60.0f; //Start match time
-    public TMP_Text timer;
-    public GameObject gameplayUI;
-    public GameObject timerUpUI;
+    public TMP_Text timer; //Timer Text 
+    public GameObject gameplayUI; //Gameplay UI Canvas Gameobject
+    public GameObject timerUpUI; //Time Up UI Canvas Gameoject
     //Paused logic
     public GameObject pausedUI;
     bool paused = false;
     // Update is called once per frame
     void Update()
     {
+        //Updates timer, rounds from float to int, then converts to string and updates UI
         startTime -= Time.deltaTime;
+        int startTimeInt;
         string startTimeString;
-        startTimeString = startTime.ToString();
-        timer.SetText(startTimeString);
+        startTimeInt = Mathf.RoundToInt(startTime);
+        startTimeString = startTimeInt.ToString();
+        timer.SetText("Time Remaining: " + startTimeString);
+        //End of game
         if (startTime <= 0.0f)
         {
             timerEnded();
@@ -50,7 +54,7 @@ public class TimerScript : MonoBehaviour
 
     }
 
-    void gamePaused()
+    public void gamePaused()
     {
         if(paused == false)
         {
