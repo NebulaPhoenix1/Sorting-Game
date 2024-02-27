@@ -392,7 +392,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &92286666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -916,7 +916,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 322546031}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1862880645}
+        m_TargetAssemblyTypeName: MenuButtons, Assembly-CSharp
+        m_MethodName: OnPlayClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &322546031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1037,7 +1049,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 420184748}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1862880645}
+        m_TargetAssemblyTypeName: MenuButtons, Assembly-CSharp
+        m_MethodName: OnQuitClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &420184748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2405,7 +2429,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 990368886}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1759903735}
+        m_TargetAssemblyTypeName: TimerScript, Assembly-CSharp
+        m_MethodName: gamePaused
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &990368886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3025,7 +3061,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1245723817}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1862880645}
+        m_TargetAssemblyTypeName: MenuButtons, Assembly-CSharp
+        m_MethodName: OnQuitClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1245723817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3216,7 +3264,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1325727026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5554,6 +5602,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1862880644}
   - component: {fileID: 1862880643}
+  - component: {fileID: 1862880645}
   m_Layer: 0
   m_Name: Main Logic Controller
   m_TagString: Untagged
@@ -5596,6 +5645,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1862880645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1862880642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fa3c248bbac17b41ad6c33cf274afff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1889183298
 GameObject:
   m_ObjectHideFlags: 0
