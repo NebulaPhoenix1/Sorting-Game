@@ -10,6 +10,7 @@ public class MatchingScript : MonoBehaviour
     public GameObject right;
     private GameObject SelectedObject;
     public TMP_Text scoreText;
+    public GameObject mainGameUI;
     //Timer modification variables
     private int correctInARow;
     private float averageSortTime; //Average time to sort. Will reset on bonus time granted
@@ -24,7 +25,34 @@ public class MatchingScript : MonoBehaviour
     public GameObject timerText;
     //Spawn position of new card
     public Vector2 cardSpawnVector;
-    
+
+
+    //Tutorial stuff
+    //(Doing it all in this script bc im lazy af)
+    public GameObject tutorialText;
+    bool tutorialOver = false;
+    bool leftSorted = false;
+    bool rightSorted = false;
+    GameObject leftTutorial;
+    GameObject rightTutorial;
+
+    void startTutorial()
+    {
+        tutorialText.SetActive(true);
+        GameObject leftTutorial = Instantiate(left);
+        leftTutorial.transform.position = new Vector2(-5, 0);
+        GameObject rightTutorial = Instantiate(right);
+        leftTutorial.transform.position = new Vector2(5, 0);
+    }
+    void finishTutorial()
+    {
+        tutorialOver = true;
+        SelectObject(); //Selects the inital object to sort
+        timer = timerText.GetComponent<TimerScript>();
+        tutorialText.SetActive(false);
+        mainGameUI.SetActive(true);
+    }
+
     //Function to pick the next object to sort
     private void SelectObject()
     {
@@ -46,8 +74,6 @@ public class MatchingScript : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1; //Resets time scale after reloading scene (makes it so timer keeps ticking)
-        SelectObject(); //Selects the inital object to sort
-        timer = timerText.GetComponent<TimerScript>();
     }
     // Update is called once per frame
     void Update()
@@ -57,30 +83,57 @@ public class MatchingScript : MonoBehaviour
             //Check for left click
             if (Input.GetMouseButtonDown(0))
             {
-                //If matching object has correct tag
-                if (SelectedObject.tag == "Left")
+                if (tutorialOver == true)
                 {
-                    correctSort();
+                    //If matching object has correct tag
+                    if (SelectedObject.tag == "Left")
+                    {
+                        correctSort();
+                    }
+                    //If matching object is wrong
+                    else
+                    {
+                        incorrrectSort();
+                    }
                 }
-                //If matching object is wrong
                 else
                 {
-                    incorrrectSort();
+                    if(leftSorted == false)
+                    {
+                        leftSorted = true;
+                        DestroyImmediate(leftTutorial);
+                    }
                 }
             }
             //Check for right click
             if (Input.GetMouseButtonDown(1))
             {
-                //If matching object has correct tag
-                if (SelectedObject.tag == "Right")
+                if (tutorialOver == true)
                 {
-                    correctSort();
+                    //If matching object has correct tag
+                    if (SelectedObject.tag == "Right")
+                    {
+                        correctSort();
+                    }
+                    //If matching object is wrong
+                    else
+                    {
+                        incorrrectSort();
+                    }
                 }
-                //If matching object is wrong
                 else
                 {
-                    incorrrectSort();
+                    if (rightSorted == false)
+                    {
+                        rightSorted = true;
+                        DestroyImmediate(rightTutorial);
+                    }
                 }
+
+            }
+            if (leftSorted == true && rightSorted == true && tutorialOver == false)
+            {
+                finishTutorial();
             }
         }
     }
