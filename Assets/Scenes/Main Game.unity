@@ -6305,6 +6305,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2031485034}
   - component: {fileID: 2031485035}
+  - component: {fileID: 2031485036}
   m_Layer: 0
   m_Name: Top card
   m_TagString: Untagged
@@ -6350,6 +6351,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2031485036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031485033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dda447a21cd89c54596e41696b199b83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 7500
+  target: {x: 0.004747748, y: -2, z: -0.7245401}
 --- !u!1 &2068224603
 GameObject:
   m_ObjectHideFlags: 0
